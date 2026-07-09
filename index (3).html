@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calista &amp; Simran Take San Diego</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,900;1,9..144,500&family=Space+Grotesk:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#123B3E;
+    --ink-deep:#0B2628;
+    --coral:#FF6B4A;
+    --sand:#F3E6D0;
+    --sand-light:#FBF4E6;
+    --seafoam:#8FBFB0;
+    --gold:#E8A23C;
+    --line:rgba(18,59,62,0.18);
+    --serif:'Fraunces', serif;
+    --sans:'Space Grotesk', sans-serif;
+    --mono:'Space Mono', monospace;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--ink);
+    background-image:
+      radial-gradient(circle at 15% 10%, rgba(143,191,176,0.12), transparent 45%),
+      radial-gradient(circle at 85% 90%, rgba(255,107,74,0.10), transparent 45%);
+    color:var(--ink);
+    font-family:var(--sans);
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* ===== HERO ===== */
+  .hero{
+    position:relative;
+    padding:90px 24px 70px;
+    text-align:center;
+    color:var(--sand-light);
+    overflow:hidden;
+  }
+  .hero::after{
+    content:"";
+    position:absolute;
+    left:0; right:0; bottom:0;
+    height:2px;
+    background:repeating-linear-gradient(90deg, var(--sand) 0 14px, transparent 14px 24px);
+    opacity:0.35;
+  }
+  .eyebrow{
+    font-family:var(--mono);
+    letter-spacing:0.25em;
+    text-transform:uppercase;
+    font-size:12px;
+    color:var(--gold);
+    margin-bottom:22px;
+  }
+  .hero h1{
+    font-family:var(--serif);
+    font-weight:900;
+    font-size:clamp(2.4rem, 6vw, 4.6rem);
+    line-height:1.04;
+    margin:0 0 18px;
+    letter-spacing:-0.01em;
+  }
+  .hero h1 em{
+    font-style:italic;
+    font-weight:500;
+    color:var(--coral);
+  }
+  .hero .subline{
+    font-family:var(--serif);
+    font-style:italic;
+    font-weight:400;
+    font-size:clamp(1rem, 2.4vw, 1.35rem);
+    color:var(--seafoam);
+    max-width:560px;
+    margin:0 auto 34px;
+  }
+  .hero-meta{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    justify-content:center;
+  }
+  .chip{
+    font-family:var(--mono);
+    font-size:12px;
+    letter-spacing:0.05em;
+    border:1px solid rgba(243,230,208,0.35);
+    padding:8px 16px;
+    border-radius:999px;
+    color:var(--sand-light);
+    background:rgba(243,230,208,0.05);
+  }
+
+  /* ===== CONTAINER ===== */
+  .wrap{
+    max-width:920px;
+    margin:0 auto;
+    padding:0 20px 100px;
+  }
+
+  .section-label{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    margin:64px 0 26px;
+    color:var(--sand-light);
+  }
+  .section-label .num{
+    font-family:var(--mono);
+    font-size:13px;
+    color:var(--ink);
+    background:var(--gold);
+    border-radius:50%;
+    width:30px; height:30px;
+    display:flex; align-items:center; justify-content:center;
+    flex-shrink:0;
+  }
+  .section-label h2{
+    font-family:var(--serif);
+    font-weight:600;
+    font-style:italic;
+    font-size:1.5rem;
+    margin:0;
+  }
+  .section-label .rule{
+    flex:1;
+    height:1px;
+    background:rgba(243,230,208,0.25);
+  }
+
+  /* ===== TICKET STUB ===== */
+  .ticket{
+    position:relative;
+    background:var(--sand-light);
+    border-radius:18px;
+    box-shadow:0 24px 50px -20px rgba(0,0,0,0.45);
+    margin-bottom:38px;
+    overflow:visible;
+  }
+  .ticket-inner{
+    display:grid;
+    grid-template-columns:1fr 200px;
+  }
+  .ticket-main{
+    padding:30px 32px;
+  }
+  .ticket-stub{
+    background:var(--ink);
+    color:var(--sand-light);
+    padding:30px 22px;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    position:relative;
+    border-radius:0 18px 18px 0;
+  }
+  .perf{
+    position:absolute;
+    left:0; top:0; bottom:0;
+    width:0;
+    border-left:2px dashed rgba(18,59,62,0.25);
+  }
+  .punch{
+    position:absolute;
+    left:-13px;
+    width:26px; height:26px;
+    background:var(--ink);
+    border-radius:50%;
+  }
+  .punch.top{top:-13px;}
+  .punch.bottom{bottom:-13px;}
+
+  .day-tag{
+    font-family:var(--mono);
+    font-size:11px;
+    letter-spacing:0.15em;
+    text-transform:uppercase;
+    color:var(--coral);
+    margin-bottom:6px;
+    display:block;
+  }
+  .ticket-main h3{
+    font-family:var(--serif);
+    font-weight:600;
+    font-size:1.7rem;
+    margin:0 0 4px;
+    color:var(--ink);
+  }
+  .ticket-main .date{
+    font-family:var(--mono);
+    font-size:12px;
+    color:rgba(18,59,62,0.55);
+    margin-bottom:20px;
+    display:block;
+  }
+
+  .flight-row{
+    display:flex;
+    align-items:center;
+    gap:16px;
+    font-family:var(--mono);
+    font-size:13px;
+    background:var(--sand);
+    border-radius:10px;
+    padding:14px 16px;
+    margin-bottom:18px;
+  }
+  .flight-row .code{
+    font-weight:700;
+    color:var(--ink);
+  }
+  .flight-row .arrow{color:var(--coral); font-size:15px;}
+  .flight-row .sub{color:rgba(18,59,62,0.6); font-size:11px;}
+
+  .event{
+    display:flex;
+    gap:16px;
+    padding:14px 0;
+    border-top:1px solid var(--line);
+  }
+  .event:first-of-type{border-top:none;}
+  .event .time{
+    font-family:var(--mono);
+    font-size:12.5px;
+    font-weight:700;
+    color:var(--coral);
+    min-width:78px;
+    flex-shrink:0;
+    padding-top:2px;
+  }
+  .event .who{
+    font-family:var(--mono);
+    font-size:10.5px;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    color:var(--seafoam-dark, #4d8577);
+    display:block;
+    margin-bottom:3px;
+  }
+  .event .what strong{
+    font-family:var(--sans);
+    font-weight:700;
+    color:var(--ink);
+    font-size:15px;
+  }
+  .event .what p{
+    margin:4px 0 0;
+    font-size:13.5px;
+    line-height:1.5;
+    color:rgba(18,59,62,0.75);
+  }
+  .event .what a{
+    color:var(--coral);
+    text-decoration:none;
+    border-bottom:1px solid rgba(255,107,74,0.4);
+  }
+  .event .what a:hover{border-bottom-color:var(--coral);}
+
+  .ticket-stub .label{
+    font-family:var(--mono);
+    font-size:10px;
+    letter-spacing:0.15em;
+    text-transform:uppercase;
+    color:var(--seafoam);
+    margin-bottom:6px;
+  }
+  .ticket-stub .passengers{
+    font-family:var(--serif);
+    font-size:1.05rem;
+    font-weight:600;
+    line-height:1.35;
+    margin-bottom:18px;
+  }
+  .ticket-stub .passengers .fine{
+    display:block;
+    font-family:var(--mono);
+    font-weight:400;
+    font-size:10.5px;
+    color:var(--gold);
+    margin-top:4px;
+  }
+  .ticket-stub .seat{
+    font-family:var(--mono);
+    font-size:11px;
+    color:rgba(243,230,208,0.6);
+  }
+  .ticket-stub .seat b{color:var(--sand-light);}
+
+  .barcode{
+    height:34px;
+    background:repeating-linear-gradient(90deg, var(--sand-light) 0 2px, transparent 2px 5px, var(--sand-light) 5px 6px, transparent 6px 9px, var(--sand-light) 9px 12px, transparent 12px 14px);
+    opacity:0.85;
+    margin-top:16px;
+  }
+
+  /* special note callout */
+  .callout{
+    background:linear-gradient(135deg, rgba(232,169,60,0.15), rgba(255,107,74,0.1));
+    border:1px solid rgba(232,169,60,0.4);
+    border-radius:12px;
+    padding:16px 18px;
+    margin:18px 0 0;
+    font-size:13.5px;
+    color:var(--ink);
+    line-height:1.5;
+  }
+  .callout b{color:var(--coral);}
+
+  footer{
+    text-align:center;
+    padding:50px 20px 60px;
+    color:rgba(243,230,208,0.5);
+    font-family:var(--mono);
+    font-size:11.5px;
+    letter-spacing:0.05em;
+  }
+  footer span{color:var(--coral);}
+
+  @media (max-width:640px){
+    .ticket-inner{grid-template-columns:1fr;}
+    .ticket-stub{border-radius:0 0 18px 18px;}
+    .perf{display:none;}
+    .punch{display:none;}
+    .hero{padding:64px 18px 50px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="eyebrow">✈ SFO → SAN · JUL 20–23</div>
+  <h1>Calista &amp; Simran<br>Take <em>San Diego</em></h1>
+  <p class="subline">Ft. Jag &amp; Nick — who, incredibly, also get to come along.</p>
+  <div class="hero-meta">
+    <span class="chip">4 DAYS</span>
+    <span class="chip">LA JOLLA</span>
+    <span class="chip">HYATT REGENCY AT AVENTINE</span>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <!-- MONDAY -->
+  <div class="section-label"><span class="num">1</span><h2>Monday, July 20 — Wheels Up</h2><span class="rule"></span></div>
+  <div class="ticket">
+    <div class="perf" style="left:calc(100% - 200px);"></div>
+    <div class="punch top" style="left:calc(100% - 200px);"></div>
+    <div class="punch bottom" style="left:calc(100% - 200px);"></div>
+    <div class="ticket-inner">
+      <div class="ticket-main">
+        <span class="day-tag">Boarding Pass</span>
+        <h3>San Francisco → San Diego</h3>
+        <span class="date">Monday, July 20, 2026</span>
+
+        <div class="flight-row">
+          <span class="code">UA 1343</span>
+          <span class="arrow">→</span>
+          <span>SFO <span class="sub">8:53 PM</span></span>
+          <span class="arrow">→</span>
+          <span>SAN <span class="sub">10:12 PM</span></span>
+        </div>
+
+        <div class="event">
+          <div class="time">10:30 PM</div>
+          <div class="what">
+            <strong>Land, grab bags, rideshare to La Jolla</strong>
+            <p>Straight to the hotel — it's late, no plans, no expectations.</p>
+          </div>
+        </div>
+        <div class="event">
+          <div class="time">11:00 PM</div>
+          <div class="what">
+            <strong>Check in — Hyatt Regency La Jolla at Aventine</strong>
+            <p>3777 La Jolla Village Dr. Unpack, decompress, sleep. Day one starts tomorrow.</p>
+          </div>
+        </div>
+      </div>
+      <div class="ticket-stub">
+        <div>
+          <div class="label">Passengers</div>
+          <div class="passengers">C. &amp; S. <span class="fine">+ J. &amp; N., economy</span></div>
+          <div class="label">Gate</div>
+          <div class="seat"><b>Vibes:</b> low-key, jet-lagged, hopeful</div>
+        </div>
+        <div class="barcode"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TUESDAY -->
+  <div class="section-label"><span class="num">2</span><h2>Tuesday, July 21 — Brunch, Laptops &amp; the Crew Expands</h2><span class="rule"></span></div>
+  <div class="ticket">
+    <div class="perf" style="left:calc(100% - 200px);"></div>
+    <div class="punch top" style="left:calc(100% - 200px);"></div>
+    <div class="punch bottom" style="left:calc(100% - 200px);"></div>
+    <div class="ticket-inner">
+      <div class="ticket-main">
+        <span class="day-tag">Day Pass</span>
+        <h3>La Jolla, on the girls' schedule</h3>
+        <span class="date">Tuesday, July 21, 2026</span>
+
+        <div class="event">
+          <div class="time">9:00 AM</div>
+          <div>
+            <span class="who">Jag &amp; Nick</span>
+            <div class="what"><strong>Clock in.</strong><p>Office until 5:00 PM — this is technically why the trip exists.</p></div>
+          </div>
+        </div>
+        <div class="event">
+          <div class="time">10:00 AM</div>
+          <div>
+            <span class="who">Calista &amp; Simran</span>
+            <div class="what"><strong>Brunch &amp; laptop time — <a href="https://www.cottagelajolla.com/" target="_blank">The Cottage La Jolla</a></strong>
+            <p>7702 Fay Ave. Unhurried, classic, easy to camp out at with a coffee and a laptop between bites.</p></div>
+          </div>
+        </div>
+        <div class="event">
+          <div class="time">1:00 PM</div>
+          <div>
+            <span class="who">Calista &amp; Simran</span>
+            <div class="what"><strong>Explore the village</strong><p>Prospect &amp; Girard shops, La Jolla Cove, the Coast Walk Trail — whatever the day calls for.</p></div>
+          </div>
+        </div>
+        <div class="event">
+          <div class="time">5:30 PM</div>
+          <div>
+            <span class="who">Everyone + Palik &amp; Karthik</span>
+            <div class="what"><strong>Happy hour &amp; dinner — <a href="http://www.dukeslajolla.com/" target="_blank">Duke's La Jolla</a></strong>
+            <p>1216 Prospect St. Oceanfront, tiki-lively, built for a bigger table. Palik &amp; Karthik drive over from Mira Mesa (~25 min).</p></div>
+          </div>
+        </div>
+
+        <div class="callout"><b>Note:</b> Jag's cousin Palik and her fiancé Karthik join tonight only — first time Calista &amp; Simran are meeting them, so let's make it a good one.</div>
+      </div>
+      <div class="ticket-stub">
+        <div>
+          <div class="label">Roster Tonight</div>
+          <div class="passengers">6 total <span class="fine">C · S · J · N · Palik · Karthik</span></div>
+          <div class="label">Commute</div>
+          <div class="seat"><b>Mira Mesa → La Jolla</b><br>~25 min</div>
+        </div>
+        <div class="barcode"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WEDNESDAY -->
+  <div class="section-label"><span class="num">3</span><h2>Wednesday, July 22 — Same Rhythm, Just the Four</h2><span class="rule"></span></div>
+  <div class="ticket">
+    <div class="perf" style="left:calc(100% - 200px);"></div>
+    <div class="punch top" style="left:calc(100% - 200px);"></div>
+    <div class="punch bottom" style="left:calc(100% - 200px);"></div>
+    <div class="ticket-inner">
+      <div class="ticket-main">
+        <span class="day-tag">Day Pass</span>
+        <h3>La Jolla, round two</h3>
+        <span class="date">Wednesday, July 22, 2026</span>
+
+        <div class="event">
+          <div class="time">9:00 AM</div>
+          <div>
+            <span class="who">Jag &amp; Nick</span>
+            <div class="what"><strong>Clock in, again.</strong><p>Office until 5:00 PM.</p></div>
+          </div>
+        </div>
+        <div class="event">
+          <div class="time">10:00 AM</div>
+          <div>
+            <span class="who">Calista &amp; Simran</span>
+            <div class="what"><strong>Brunch &amp; laptop time — <a href="https://www.covehouselajolla.com/" target="_blank">Cove House</a></strong>
+            <p>8030 Girard Ave. Casual, ocean-view, good wifi-and-waffle-fries energy.</p></div>
+          </div>
+        </div>
+        <div class="event">
+          <div class="time">1:00 PM</div>
+          <div>
+            <span class="who">Calista &amp; Simran</span>
+            <div class="what"><strong>Explore, take two</strong><p>Torrey Pines cliffs, Birch Aquarium, or just more of the village — no agenda required.</p></div>
+          </div>
+        </div>
+        <div class="event">
+          <div class="time">6:00 PM</div>
+          <div>
+            <span class="who">Just the four</span>
+            <div class="what"><strong>Dinner — <a href="https://www.nine-ten.com/" target="_blank">NINE-TEN Restaurant &amp; Bar</a></strong>
+            <p>910 Prospect St. A step up for tonight — seasonal tasting-forward menu, easy to linger over since it's just the crew.</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="ticket-stub">
+        <div>
+          <div class="label">Roster Tonight</div>
+          <div class="passengers">4 total <span class="fine">C · S · J · N</span></div>
+          <div class="label">Mood</div>
+          <div class="seat"><b>Slightly fancier</b><br>than Tuesday</div>
+        </div>
+        <div class="barcode"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- THURSDAY -->
+  <div class="section-label"><span class="num">4</span><h2>Thursday, July 23 — Last Lunch &amp; Wheels Up</h2><span class="rule"></span></div>
+  <div class="ticket">
+    <div class="perf" style="left:calc(100% - 200px);"></div>
+    <div class="punch top" style="left:calc(100% - 200px);"></div>
+    <div class="punch bottom" style="left:calc(100% - 200px);"></div>
+    <div class="ticket-inner">
+      <div class="ticket-main">
+        <span class="day-tag">Boarding Pass</span>
+        <h3>San Diego → San Francisco</h3>
+        <span class="date">Thursday, July 23, 2026</span>
+
+        <div class="event">
+          <div class="time">9:00 AM</div>
+          <div>
+            <span class="who">Jag &amp; Nick</span>
+            <div class="what"><strong>Final work stretch.</strong><p>Office until noon — short one, they've earned it.</p></div>
+          </div>
+        </div>
+        <div class="event">
+          <div class="time">12:30 PM</div>
+          <div>
+            <span class="who">Everyone</span>
+            <div class="what"><strong>Lunch together — <a href="http://codyslj.com/" target="_blank">Cody's La Jolla</a></strong>
+            <p>1025 Prospect St #210. Casual rooftop, easy in-and-out before the airport run.</p></div>
+          </div>
+        </div>
+        <div class="event">
+          <div class="time">2:30 PM</div>
+          <div>
+            <span class="what"><strong>Back to the hotel</strong><p>Final wind-down, pack up, check out.</p></div>
+          </div>
+        </div>
+
+        <div class="flight-row">
+          <span class="code">UA 1302</span>
+          <span class="arrow">→</span>
+          <span>SAN <span class="sub">6:27 PM</span></span>
+          <span class="arrow">→</span>
+          <span>SFO <span class="sub">7:53 PM</span></span>
+        </div>
+      </div>
+      <div class="ticket-stub">
+        <div>
+          <div class="label">Passengers</div>
+          <div class="passengers">C. &amp; S. <span class="fine">+ J. &amp; N., home safe</span></div>
+          <div class="label">Status</div>
+          <div class="seat"><b>Trip complete</b><br>friendship: upgraded</div>
+        </div>
+        <div class="barcode"></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  Booked by <span>Calista &amp; Simran</span> · Guest passes courtesy of Jag &amp; Nick's employer
+</footer>
+
+</body>
+</html>
