@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,54 +9,94 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,900;1,9..144,500&family=Space+Grotesk:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --ink:#123B3E;
-    --ink-deep:#0B2628;
-    --coral:#FF6B4A;
-    --sand:#F3E6D0;
-    --sand-light:#FBF4E6;
-    --seafoam:#8FBFB0;
-    --gold:#E8A23C;
-    --line:rgba(18,59,62,0.18);
+    --ink:#2B2A28;
+    --ink-soft:rgba(43,42,40,0.68);
+    --navy:#2E4A5C;
+    --cream:#FBF6EC;
+    --cream-deep:#F3E7D2;
+    --white:#FFFFFF;
+    --terracotta:#C1613F;
+    --ocean:#3E7C97;
+    --gold:#B8863B;
+    --gold-light:#E3B563;
+    --sage:#7C9473;
+    --line:rgba(43,42,40,0.12);
     --serif:'Fraunces', serif;
     --sans:'Space Grotesk', sans-serif;
     --mono:'Space Mono', monospace;
+
+    /* per-day accents, assigned inline on each .ticket */
+    --day-monday:#2E4A5C;
+    --day-tuesday:#3E7C97;
+    --day-wednesday:#C1613F;
+    --day-thursday:#B8863B;
   }
 
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
   body{
     margin:0;
-    background:var(--ink);
-    background-image:
-      radial-gradient(circle at 15% 10%, rgba(143,191,176,0.12), transparent 45%),
-      radial-gradient(circle at 85% 90%, rgba(255,107,74,0.10), transparent 45%);
+    background:
+      radial-gradient(ellipse 900px 500px at 15% 0%, rgba(62,124,151,0.10), transparent 60%),
+      radial-gradient(ellipse 900px 600px at 90% 30%, rgba(193,97,63,0.08), transparent 55%),
+      linear-gradient(180deg, var(--cream) 0%, var(--cream-deep) 100%);
+    background-attachment:fixed;
     color:var(--ink);
     font-family:var(--sans);
     -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
   }
 
   /* ===== HERO ===== */
   .hero{
     position:relative;
-    padding:90px 24px 70px;
+    padding:80px 24px 0;
     text-align:center;
-    color:var(--sand-light);
+    color:var(--ink);
     overflow:hidden;
+    background:linear-gradient(180deg, #DEEEF2 0%, #EFE7D4 55%, var(--cream) 100%);
   }
-  .hero::after{
-    content:"";
+  .hero-sun{
     position:absolute;
-    left:0; right:0; bottom:0;
-    height:2px;
-    background:repeating-linear-gradient(90deg, var(--sand) 0 14px, transparent 14px 24px);
-    opacity:0.35;
+    top:135px; left:7%;
+    width:100px; height:100px;
+    border-radius:50%;
+    background:radial-gradient(circle at 38% 32%, #FFF6DE, var(--gold-light) 60%, var(--gold) 100%);
+    box-shadow:0 0 60px 14px rgba(227,181,99,0.35);
+    opacity:0.85;
+    z-index:0;
   }
+  @media (max-width:760px){
+    .hero-sun{top:64px; left:16px; width:64px; height:64px;}
+  }
+  .hero-content{position:relative; z-index:2;}
+  .hero-birds{position:absolute; top:76px; left:0; right:0; z-index:1; opacity:0.4;}
+  .postmark{
+    position:absolute;
+    top:26px; right:26px;
+    width:96px; height:96px;
+    border:1.5px dashed rgba(43,42,40,0.3);
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    font-family:var(--mono);
+    font-size:9px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    line-height:1.6;
+    transform:rotate(-8deg);
+    z-index:3;
+  }
+  .postmark b{display:block; font-size:12px; font-family:var(--serif); font-style:italic; letter-spacing:0; color:var(--ink);}
   .eyebrow{
     font-family:var(--mono);
     letter-spacing:0.25em;
     text-transform:uppercase;
     font-size:12px;
-    color:var(--gold);
+    color:var(--ocean);
     margin-bottom:22px;
   }
   .hero h1{
@@ -65,18 +106,19 @@
     line-height:1.04;
     margin:0 0 18px;
     letter-spacing:-0.01em;
+    color:var(--ink);
   }
   .hero h1 em{
     font-style:italic;
     font-weight:500;
-    color:var(--coral);
+    color:var(--terracotta);
   }
   .hero .subline{
     font-family:var(--serif);
     font-style:italic;
     font-weight:400;
     font-size:clamp(1rem, 2.4vw, 1.35rem);
-    color:var(--seafoam);
+    color:var(--ink-soft);
     max-width:560px;
     margin:0 auto 34px;
   }
@@ -85,17 +127,27 @@
     flex-wrap:wrap;
     gap:10px;
     justify-content:center;
+    margin-bottom:50px;
   }
   .chip{
     font-family:var(--mono);
     font-size:12px;
     letter-spacing:0.05em;
-    border:1px solid rgba(243,230,208,0.35);
+    border:1px solid rgba(43,42,40,0.2);
     padding:8px 16px;
     border-radius:999px;
-    color:var(--sand-light);
-    background:rgba(243,230,208,0.05);
+    color:var(--ink);
+    background:rgba(255,255,255,0.55);
+    backdrop-filter:blur(2px);
   }
+  .wave-divider{
+    display:block;
+    width:100%;
+    line-height:0;
+    position:relative;
+    z-index:2;
+  }
+  .wave-divider svg{width:100%; height:auto; display:block;}
 
   /* ===== CONTAINER ===== */
   .wrap{
@@ -109,17 +161,18 @@
     align-items:center;
     gap:14px;
     margin:64px 0 26px;
-    color:var(--sand-light);
+    color:var(--ink);
   }
   .section-label .num{
     font-family:var(--mono);
     font-size:13px;
-    color:var(--ink);
-    background:var(--gold);
+    color:var(--white);
+    background:var(--day-color, var(--gold));
     border-radius:50%;
     width:30px; height:30px;
     display:flex; align-items:center; justify-content:center;
     flex-shrink:0;
+    box-shadow:0 0 0 5px rgba(43,42,40,0.04);
   }
   .section-label h2{
     font-family:var(--serif);
@@ -127,21 +180,24 @@
     font-style:italic;
     font-size:1.5rem;
     margin:0;
+    color:var(--ink);
   }
   .section-label .rule{
     flex:1;
     height:1px;
-    background:rgba(243,230,208,0.25);
+    background:linear-gradient(90deg, var(--day-color, rgba(43,42,40,0.25)), transparent 85%);
+    opacity:0.5;
   }
 
   /* ===== TICKET STUB ===== */
   .ticket{
     position:relative;
-    background:var(--sand-light);
+    background:var(--white);
     border-radius:18px;
-    box-shadow:0 24px 50px -20px rgba(0,0,0,0.45);
-    margin-bottom:38px;
+    box-shadow:0 20px 45px -22px rgba(43,42,40,0.28), 0 0 0 1px rgba(43,42,40,0.05);
+    margin-bottom:44px;
     overflow:visible;
+    border-top:4px solid var(--day-color, var(--gold));
   }
   .ticket-inner{
     display:grid;
@@ -151,26 +207,26 @@
     padding:30px 32px;
   }
   .ticket-stub{
-    background:var(--ink);
-    color:var(--sand-light);
+    background:linear-gradient(155deg, color-mix(in srgb, var(--day-color, var(--gold)) 16%, var(--cream)) 0%, var(--cream-deep) 100%);
+    color:var(--ink);
     padding:30px 22px;
     display:flex;
     flex-direction:column;
     justify-content:space-between;
     position:relative;
-    border-radius:0 18px 18px 0;
+    border-radius:0 14px 14px 0;
   }
   .perf{
     position:absolute;
     left:0; top:0; bottom:0;
     width:0;
-    border-left:2px dashed rgba(18,59,62,0.25);
+    border-left:2px dashed rgba(43,42,40,0.18);
   }
   .punch{
     position:absolute;
     left:-13px;
     width:26px; height:26px;
-    background:var(--ink);
+    background:var(--cream);
     border-radius:50%;
   }
   .punch.top{top:-13px;}
@@ -181,10 +237,13 @@
     font-size:11px;
     letter-spacing:0.15em;
     text-transform:uppercase;
-    color:var(--coral);
+    color:var(--day-color, var(--terracotta));
     margin-bottom:6px;
-    display:block;
+    display:flex;
+    align-items:center;
+    gap:8px;
   }
+  .day-tag svg{width:16px; height:16px; flex-shrink:0;}
   .ticket-main h3{
     font-family:var(--serif);
     font-weight:600;
@@ -206,16 +265,17 @@
     gap:16px;
     font-family:var(--mono);
     font-size:13px;
-    background:var(--sand);
+    background:var(--cream-deep);
     border-radius:10px;
     padding:14px 16px;
     margin-bottom:18px;
+    border-left:4px solid var(--day-color, var(--terracotta));
   }
   .flight-row .code{
     font-weight:700;
     color:var(--ink);
   }
-  .flight-row .arrow{color:var(--coral); font-size:15px;}
+  .flight-row .arrow{color:var(--day-color, var(--terracotta)); font-size:15px;}
   .flight-row .sub{color:rgba(18,59,62,0.6); font-size:11px;}
 
   .event{
@@ -229,7 +289,7 @@
     font-family:var(--mono);
     font-size:12.5px;
     font-weight:700;
-    color:var(--coral);
+    color:var(--day-color, var(--terracotta));
     min-width:78px;
     flex-shrink:0;
     padding-top:2px;
@@ -239,7 +299,7 @@
     font-size:10.5px;
     letter-spacing:0.06em;
     text-transform:uppercase;
-    color:var(--seafoam-dark, #4d8577);
+    color:#3a8f7a;
     display:block;
     margin-bottom:3px;
   }
@@ -256,18 +316,20 @@
     color:rgba(18,59,62,0.75);
   }
   .event .what a{
-    color:var(--coral);
+    color:var(--day-color, var(--terracotta));
     text-decoration:none;
-    border-bottom:1px solid rgba(255,107,74,0.4);
+    border-bottom:1px solid currentColor;
+    opacity:0.85;
   }
-  .event .what a:hover{border-bottom-color:var(--coral);}
+  .event .what a:hover{opacity:1;}
 
   .ticket-stub .label{
     font-family:var(--mono);
     font-size:10px;
     letter-spacing:0.15em;
     text-transform:uppercase;
-    color:var(--seafoam);
+    color:var(--day-color, var(--ink-soft));
+    opacity:0.85;
     margin-bottom:6px;
   }
   .ticket-stub .passengers{
@@ -288,21 +350,21 @@
   .ticket-stub .seat{
     font-family:var(--mono);
     font-size:11px;
-    color:rgba(243,230,208,0.6);
+    color:var(--ink-soft);
   }
-  .ticket-stub .seat b{color:var(--sand-light);}
+  .ticket-stub .seat b{color:var(--ink);}
 
   .barcode{
     height:34px;
-    background:repeating-linear-gradient(90deg, var(--sand-light) 0 2px, transparent 2px 5px, var(--sand-light) 5px 6px, transparent 6px 9px, var(--sand-light) 9px 12px, transparent 12px 14px);
-    opacity:0.85;
+    background:repeating-linear-gradient(90deg, var(--ink) 0 2px, transparent 2px 5px, var(--ink) 5px 6px, transparent 6px 9px, var(--ink) 9px 12px, transparent 12px 14px);
+    opacity:0.45;
     margin-top:16px;
   }
 
   /* special note callout */
   .callout{
-    background:linear-gradient(135deg, rgba(232,169,60,0.15), rgba(255,107,74,0.1));
-    border:1px solid rgba(232,169,60,0.4);
+    background:linear-gradient(135deg, color-mix(in srgb, var(--day-color, var(--gold)) 18%, transparent), rgba(193,97,63,0.06));
+    border:1px solid color-mix(in srgb, var(--day-color, var(--gold)) 45%, transparent);
     border-radius:12px;
     padding:16px 18px;
     margin:18px 0 0;
@@ -310,17 +372,54 @@
     color:var(--ink);
     line-height:1.5;
   }
-  .callout b{color:var(--coral);}
+  .callout b{color:var(--day-color, var(--terracotta));}
+
+  .trip-end{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    text-align:center;
+    gap:10px;
+    padding:30px 20px 10px;
+    color:var(--ink-soft);
+  }
+  .trip-end .sun-icon{width:70px; height:auto;}
+  .trip-end p{
+    font-family:var(--serif);
+    font-style:italic;
+    font-size:1.05rem;
+    max-width:460px;
+    margin:0;
+  }
+  .trip-end span{color:var(--terracotta); font-weight:600; font-style:normal;}
 
   footer{
     text-align:center;
-    padding:50px 20px 60px;
-    color:rgba(243,230,208,0.5);
+    padding:20px 20px 60px;
+    color:var(--ink-soft);
+    opacity:0.7;
     font-family:var(--mono);
     font-size:11.5px;
     letter-spacing:0.05em;
   }
-  footer span{color:var(--coral);}
+  footer span{color:var(--terracotta);}
+
+  /* ===== SCROLL REVEAL ===== */
+  .reveal{
+    opacity:0;
+    transform:translateY(46px) scale(0.985);
+    transition:opacity 1.3s cubic-bezier(0.19,1,0.22,1), transform 1.3s cubic-bezier(0.19,1,0.22,1);
+    will-change:opacity, transform;
+  }
+  .reveal.visible{
+    opacity:1;
+    transform:translateY(0) scale(1);
+  }
+  .section-label.reveal{transition-delay:0.05s;}
+  .ticket.reveal{transition-delay:0.12s;}
+  @media (prefers-reduced-motion: reduce){
+    .reveal{opacity:1; transform:none; transition:none;}
+  }
 
   @media (max-width:640px){
     .ticket-inner{grid-template-columns:1fr;}
@@ -334,27 +433,38 @@
 <body>
 
 <div class="hero">
-  <div class="eyebrow">✈ SFO → SAN · JUL 20–23</div>
-  <h1>Calista &amp; Simran<br>Take <em>San Diego</em></h1>
-  <p class="subline">Ft. Jag &amp; Nick — who, incredibly, also get to come along.</p>
-  <div class="hero-meta">
-    <span class="chip">4 DAYS</span>
-    <span class="chip">LA JOLLA</span>
-    <span class="chip">HYATT REGENCY AT AVENTINE</span>
+  <div class="postmark"><span><b>San Diego</b>CA · JUL 20–23<br>✈ SFO</span></div>
+  <div class="hero-sun"></div>
+  <svg class="hero-birds" viewBox="0 0 800 60" preserveAspectRatio="xMidYMid meet"><g fill="none" stroke="rgba(43,42,40,0.35)" stroke-width="2" stroke-linecap="round"><path d="M120 20 q8 -10 16 0 q8 -10 16 0"/><path d="M300 8 q7 -8 14 0 q7 -8 14 0"/><path d="M540 24 q9 -11 18 0 q9 -11 18 0"/><path d="M660 6 q6 -7 12 0 q6 -7 12 0"/></g></svg>
+  <div class="hero-content">
+    <div class="eyebrow">✈ SFO → SAN · JUL 20–23</div>
+    <h1>Calista &amp; Simran<br>Take <em>San Diego</em></h1>
+    <p class="subline">Ft. Jag &amp; Nick — who, incredibly, also get to come along.</p>
+    <div class="hero-meta">
+      <span class="chip">4 DAYS</span>
+      <span class="chip">LA JOLLA</span>
+      <span class="chip">HYATT REGENCY AT AVENTINE</span>
+    </div>
+  </div>
+  <div class="wave-divider">
+    <svg viewBox="0 0 1440 110" preserveAspectRatio="none">
+      <path d="M0,40 C 240,100 480,0 720,40 C 960,80 1200,10 1440,50 L1440,110 L0,110 Z" fill="var(--cream-deep)"/>
+      <path d="M0,60 C 240,20 480,90 720,55 C 960,25 1200,85 1440,60 L1440,110 L0,110 Z" fill="var(--cream)" opacity="0.7"/>
+    </svg>
   </div>
 </div>
 
 <div class="wrap">
 
   <!-- MONDAY -->
-  <div class="section-label"><span class="num">1</span><h2>Monday, July 20 — Wheels Up</h2><span class="rule"></span></div>
-  <div class="ticket">
+  <div class="section-label reveal" style="--day-color:var(--day-monday);"><span class="num">1</span><h2>Monday, July 20 — Wheels Up</h2><span class="rule"></span></div>
+  <div class="ticket reveal" style="--day-color:var(--day-monday);">
     <div class="perf" style="left:calc(100% - 200px);"></div>
     <div class="punch top" style="left:calc(100% - 200px);"></div>
     <div class="punch bottom" style="left:calc(100% - 200px);"></div>
     <div class="ticket-inner">
       <div class="ticket-main">
-        <span class="day-tag">Boarding Pass</span>
+        <span class="day-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg>Boarding Pass</span>
         <h3>San Francisco → San Diego</h3>
         <span class="date">Monday, July 20, 2026</span>
 
@@ -376,7 +486,7 @@
         <div class="event">
           <div class="time">11:00 PM</div>
           <div class="what">
-            <strong>Check in — Hyatt Regency La Jolla at Aventine</strong>
+            <strong>Check in — <a href="https://www.hyatt.com/hyatt-regency/en-US/jolla-hyatt-regency-la-jolla-at-aventine" target="_blank">Hyatt Regency La Jolla at Aventine</a></strong>
             <p>3777 La Jolla Village Dr. Unpack, decompress, sleep. Day one starts tomorrow.</p>
           </div>
         </div>
@@ -394,14 +504,14 @@
   </div>
 
   <!-- TUESDAY -->
-  <div class="section-label"><span class="num">2</span><h2>Tuesday, July 21 — Brunch, Laptops &amp; the Crew Expands</h2><span class="rule"></span></div>
-  <div class="ticket">
+  <div class="section-label reveal" style="--day-color:var(--day-tuesday);"><span class="num">2</span><h2>Tuesday, July 21 — Brunch, Laptops &amp; the Crew Expands</h2><span class="rule"></span></div>
+  <div class="ticket reveal" style="--day-color:var(--day-tuesday);">
     <div class="perf" style="left:calc(100% - 200px);"></div>
     <div class="punch top" style="left:calc(100% - 200px);"></div>
     <div class="punch bottom" style="left:calc(100% - 200px);"></div>
     <div class="ticket-inner">
       <div class="ticket-main">
-        <span class="day-tag">Day Pass</span>
+        <span class="day-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>Day Pass</span>
         <h3>La Jolla, on the girls' schedule</h3>
         <span class="date">Tuesday, July 21, 2026</span>
 
@@ -424,26 +534,36 @@
           <div class="time">1:00 PM</div>
           <div>
             <span class="who">Calista &amp; Simran</span>
-            <div class="what"><strong>Explore the village</strong><p>Prospect &amp; Girard shops, La Jolla Cove, the Coast Walk Trail — whatever the day calls for.</p></div>
-          </div>
-        </div>
-        <div class="event">
-          <div class="time">5:30 PM</div>
-          <div>
-            <span class="who">Everyone + Palik &amp; Karthik</span>
-            <div class="what"><strong>Happy hour &amp; dinner — <a href="http://www.dukeslajolla.com/" target="_blank">Duke's La Jolla</a></strong>
-            <p>1216 Prospect St. Oceanfront, tiki-lively, built for a bigger table. Palik &amp; Karthik drive over from Mira Mesa (~25 min).</p></div>
+            <div class="what"><strong>Explore the village</strong><p>Prospect &amp; Girard shops, <a href="https://www.sandiego.gov/lifeguards/beaches/cove" target="_blank">La Jolla Cove</a>, the <a href="https://www.friendsofcoastwalk.org/" target="_blank">Coast Walk Trail</a> — whatever the day calls for.</p></div>
           </div>
         </div>
 
-        <div class="callout"><b>Note:</b> Jag's cousin Palik and her fiancé Karthik join tonight only — first time Calista &amp; Simran are meeting them, so let's make it a good one.</div>
+        <div class="callout"><b>Option:</b> <a href="https://new.dintaifungusa.com/us/locations/san-diego.html" target="_blank">Din Tai Fung</a> is also on the table today if the mood strikes — no reservations there, so it's walk-in and waitlist.</div>
+        <div class="event">
+          <div class="time">Evening</div>
+          <div>
+            <span class="who">Nick &amp; Calista</span>
+            <div class="what"><strong>Do their own thing</strong>
+            <p>No reservation, no plan — dinner and drinks wherever the evening takes them.</p></div>
+          </div>
+        </div>
+        <div class="event">
+          <div class="time">7:45 PM</div>
+          <div>
+            <span class="who">Jag &amp; Simran + Palik &amp; Karthik</span>
+            <div class="what"><strong>Family dinner — <a href="https://www.marisilajolla.com/" target="_blank">Marisi</a></strong>
+            <p>Reservation confirmed for 4, standard seating (indoor + covered main patio). Palik &amp; Karthik come straight to dinner.</p></div>
+          </div>
+        </div>
+
+        <div class="callout"><b>Note:</b> Two threads tonight — Jag &amp; Simran are with family, Nick &amp; Calista have the evening free to themselves.</div>
       </div>
       <div class="ticket-stub">
         <div>
-          <div class="label">Roster Tonight</div>
-          <div class="passengers">6 total <span class="fine">C · S · J · N · Palik · Karthik</span></div>
-          <div class="label">Commute</div>
-          <div class="seat"><b>Mira Mesa → La Jolla</b><br>~25 min</div>
+          <div class="label">Family Dinner</div>
+          <div class="passengers">Jag · Simran <span class="fine">+ Palik · Karthik</span></div>
+          <div class="label">On Their Own</div>
+          <div class="seat"><b>Nick &amp; Calista</b><br>open evening</div>
         </div>
         <div class="barcode"></div>
       </div>
@@ -451,14 +571,14 @@
   </div>
 
   <!-- WEDNESDAY -->
-  <div class="section-label"><span class="num">3</span><h2>Wednesday, July 22 — Same Rhythm, Just the Four</h2><span class="rule"></span></div>
-  <div class="ticket">
+  <div class="section-label reveal" style="--day-color:var(--day-wednesday);"><span class="num">3</span><h2>Wednesday, July 22 — Same Rhythm, Just the Four</h2><span class="rule"></span></div>
+  <div class="ticket reveal" style="--day-color:var(--day-wednesday);">
     <div class="perf" style="left:calc(100% - 200px);"></div>
     <div class="punch top" style="left:calc(100% - 200px);"></div>
     <div class="punch bottom" style="left:calc(100% - 200px);"></div>
     <div class="ticket-inner">
       <div class="ticket-main">
-        <span class="day-tag">Day Pass</span>
+        <span class="day-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>Day Pass</span>
         <h3>La Jolla, round two</h3>
         <span class="date">Wednesday, July 22, 2026</span>
 
@@ -481,24 +601,35 @@
           <div class="time">1:00 PM</div>
           <div>
             <span class="who">Calista &amp; Simran</span>
-            <div class="what"><strong>Explore, take two</strong><p>Torrey Pines cliffs, Birch Aquarium, or just more of the village — no agenda required.</p></div>
+            <div class="what"><strong>Explore, take two</strong><p><a href="https://torreypine.org/" target="_blank">Torrey Pines</a> cliffs, <a href="https://aquarium.ucsd.edu/" target="_blank">Birch Aquarium</a>, or just more of the village — no agenda required.</p></div>
+          </div>
+        </div>
+
+        <div class="callout"><b>Option:</b> <a href="https://new.dintaifungusa.com/us/locations/san-diego.html" target="_blank">Din Tai Fung</a> is also on the table today if the mood strikes — no reservations there, so it's walk-in and waitlist.</div>
+
+        <div class="event">
+          <div class="time">7:30 PM</div>
+          <div>
+            <span class="who">Jag, Simran, Nick &amp; Calista</span>
+            <div class="what"><strong>Dinner — <a href="https://www.telefericbarcelona.com/lajolla" target="_blank">Teleféric Barcelona</a>, La Jolla</strong>
+            <p>Reservation confirmed for 4, outdoor seating. Tapas, sangria, and a lively covered-patio energy to close out the crew's last full night together.</p></div>
           </div>
         </div>
         <div class="event">
-          <div class="time">6:00 PM</div>
+          <div class="time">9:15 PM</div>
           <div>
-            <span class="who">Just the four</span>
-            <div class="what"><strong>Dinner — <a href="https://www.nine-ten.com/" target="_blank">NINE-TEN Restaurant &amp; Bar</a></strong>
-            <p>910 Prospect St. A step up for tonight — seasonal tasting-forward menu, easy to linger over since it's just the crew.</p></div>
+            <span class="who">Jag, Simran, Nick &amp; Calista</span>
+            <div class="what"><strong>Nightcap — <a href="https://raisedxwolves.com/" target="_blank">Raised by Wolves</a></strong>
+            <p>Party of 4, right next door to Teleféric. Cool, moody cocktail den for one quick round before an early night — Jag &amp; Nick are back in the office tomorrow.</p></div>
           </div>
         </div>
       </div>
       <div class="ticket-stub">
         <div>
           <div class="label">Roster Tonight</div>
-          <div class="passengers">4 total <span class="fine">C · S · J · N</span></div>
-          <div class="label">Mood</div>
-          <div class="seat"><b>Slightly fancier</b><br>than Tuesday</div>
+          <div class="passengers">4 total <span class="fine">Jag · Simran · Nick · Calista</span></div>
+          <div class="label">Last Stop</div>
+          <div class="seat"><b>Raised by Wolves</b><br>9:15 PM · party of 4</div>
         </div>
         <div class="barcode"></div>
       </div>
@@ -506,15 +637,15 @@
   </div>
 
   <!-- THURSDAY -->
-  <div class="section-label"><span class="num">4</span><h2>Thursday, July 23 — Last Lunch &amp; Wheels Up</h2><span class="rule"></span></div>
-  <div class="ticket">
+  <div class="section-label reveal" style="--day-color:var(--day-thursday);"><span class="num">4</span><h2>Thursday, July 23 — Last Lunch, Then a Fork in the Road</h2><span class="rule"></span></div>
+  <div class="ticket reveal" style="--day-color:var(--day-thursday);">
     <div class="perf" style="left:calc(100% - 200px);"></div>
     <div class="punch top" style="left:calc(100% - 200px);"></div>
     <div class="punch bottom" style="left:calc(100% - 200px);"></div>
     <div class="ticket-inner">
       <div class="ticket-main">
-        <span class="day-tag">Boarding Pass</span>
-        <h3>San Diego → San Francisco</h3>
+        <span class="day-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg>Boarding Pass</span>
+        <h3>Jag &amp; Simran: San Diego → San Francisco</h3>
         <span class="date">Thursday, July 23, 2026</span>
 
         <div class="event">
@@ -529,13 +660,14 @@
           <div>
             <span class="who">Everyone</span>
             <div class="what"><strong>Lunch together — <a href="http://codyslj.com/" target="_blank">Cody's La Jolla</a></strong>
-            <p>1025 Prospect St #210. Casual rooftop, easy in-and-out before the airport run.</p></div>
+            <p>1025 Prospect St #210. Casual rooftop, one last meal all four together before the group splits.</p></div>
           </div>
         </div>
         <div class="event">
           <div class="time">2:30 PM</div>
           <div>
-            <span class="what"><strong>Back to the hotel</strong><p>Final wind-down, pack up, check out.</p></div>
+            <span class="who">Jag &amp; Simran</span>
+            <div class="what"><strong>Back to the hotel</strong><p>Final wind-down, pack up, check out.</p></div>
           </div>
         </div>
 
@@ -550,13 +682,18 @@
       <div class="ticket-stub">
         <div>
           <div class="label">Passengers</div>
-          <div class="passengers">C. &amp; S. <span class="fine">+ J. &amp; N., home safe</span></div>
-          <div class="label">Status</div>
-          <div class="seat"><b>Trip complete</b><br>friendship: upgraded</div>
+          <div class="passengers">Jag &amp; Simran <span class="fine">home tonight</span></div>
+          <div class="label">Staying Behind</div>
+          <div class="seat"><b>Nick &amp; Calista</b><br>one more night</div>
         </div>
         <div class="barcode"></div>
       </div>
     </div>
+  </div>
+
+  <div class="trip-end reveal">
+    <svg viewBox="0 0 100 40" class="sun-icon" aria-hidden="true"><circle cx="50" cy="24" r="14" fill="var(--gold)"/><g stroke="var(--gold)" stroke-width="2.5" stroke-linecap="round"><line x1="50" y1="2" x2="50" y2="7"/><line x1="50" y1="41" x2="50" y2="46"/><line x1="26" y1="24" x2="31" y2="24"/><line x1="69" y1="24" x2="74" y2="24"/><line x1="33" y1="7" x2="36" y2="10"/><line x1="64" y1="38" x2="67" y2="41"/><line x1="67" y1="7" x2="64" y2="10"/><line x1="36" y1="38" x2="33" y2="41"/></g></svg>
+    <p>Group trip: officially a wrap. <span>Nick &amp; Calista</span> are hanging back one more night — that part's just theirs.</p>
   </div>
 
 </div>
@@ -565,5 +702,66 @@
   Booked by <span>Calista &amp; Simran</span> · Guest passes courtesy of Jag &amp; Nick's employer
 </footer>
 
+
+<script>
+  const revealEls = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+
+  revealEls.forEach(el => observer.observe(el));
+
+  /* ===== Luxurious inertia scroll (desktop, mouse wheel only) ===== */
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const isTouchDevice = matchMedia('(hover: none), (pointer: coarse)').matches;
+
+  if (!prefersReducedMotion && !isTouchDevice) {
+    let current = window.scrollY;
+    let target = window.scrollY;
+    let ticking = false;
+    const ease = 0.085; // lower = smoother/heavier, higher = snappier
+
+    function onWheel(e) {
+      e.preventDefault();
+      target += e.deltaY;
+      target = Math.max(0, Math.min(target, document.documentElement.scrollHeight - window.innerHeight));
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(render);
+      }
+    }
+
+    function render() {
+      current += (target - current) * ease;
+      if (Math.abs(target - current) < 0.4) {
+        current = target;
+        window.scrollTo(0, current);
+        ticking = false;
+        return;
+      }
+      window.scrollTo(0, current);
+      requestAnimationFrame(render);
+    }
+
+    window.addEventListener('wheel', onWheel, { passive: false });
+
+    // keep target in sync if the user scrolls via keyboard, scrollbar drag, or anchor jump
+    let syncTimeout;
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        clearTimeout(syncTimeout);
+        syncTimeout = setTimeout(() => {
+          target = window.scrollY;
+          current = window.scrollY;
+        }, 120);
+      }
+    }, { passive: true });
+  }
+</script>
 </body>
 </html>
