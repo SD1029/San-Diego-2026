@@ -407,16 +407,14 @@
   /* ===== SCROLL REVEAL ===== */
   .reveal{
     opacity:0;
-    transform:translateY(46px) scale(0.985);
-    transition:opacity 1.3s cubic-bezier(0.19,1,0.22,1), transform 1.3s cubic-bezier(0.19,1,0.22,1);
+    transform:translateY(24px);
+    transition:opacity 0.6s ease-out, transform 0.6s ease-out;
     will-change:opacity, transform;
   }
   .reveal.visible{
     opacity:1;
-    transform:translateY(0) scale(1);
+    transform:translateY(0);
   }
-  .section-label.reveal{transition-delay:0.05s;}
-  .ticket.reveal{transition-delay:0.12s;}
   @media (prefers-reduced-motion: reduce){
     .reveal{opacity:1; transform:none; transition:none;}
   }
@@ -715,53 +713,6 @@
   }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
 
   revealEls.forEach(el => observer.observe(el));
-
-  /* ===== Luxurious inertia scroll (desktop, mouse wheel only) ===== */
-  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const isTouchDevice = matchMedia('(hover: none), (pointer: coarse)').matches;
-
-  if (!prefersReducedMotion && !isTouchDevice) {
-    let current = window.scrollY;
-    let target = window.scrollY;
-    let ticking = false;
-    const ease = 0.085; // lower = smoother/heavier, higher = snappier
-
-    function onWheel(e) {
-      e.preventDefault();
-      target += e.deltaY;
-      target = Math.max(0, Math.min(target, document.documentElement.scrollHeight - window.innerHeight));
-      if (!ticking) {
-        ticking = true;
-        requestAnimationFrame(render);
-      }
-    }
-
-    function render() {
-      current += (target - current) * ease;
-      if (Math.abs(target - current) < 0.4) {
-        current = target;
-        window.scrollTo(0, current);
-        ticking = false;
-        return;
-      }
-      window.scrollTo(0, current);
-      requestAnimationFrame(render);
-    }
-
-    window.addEventListener('wheel', onWheel, { passive: false });
-
-    // keep target in sync if the user scrolls via keyboard, scrollbar drag, or anchor jump
-    let syncTimeout;
-    window.addEventListener('scroll', () => {
-      if (!ticking) {
-        clearTimeout(syncTimeout);
-        syncTimeout = setTimeout(() => {
-          target = window.scrollY;
-          current = window.scrollY;
-        }, 120);
-      }
-    }, { passive: true });
-  }
 </script>
 </body>
 </html>
