@@ -40,7 +40,6 @@
       radial-gradient(ellipse 900px 500px at 15% 0%, rgba(62,124,151,0.10), transparent 60%),
       radial-gradient(ellipse 900px 600px at 90% 30%, rgba(193,97,63,0.08), transparent 55%),
       linear-gradient(180deg, var(--cream) 0%, var(--cream-deep) 100%);
-    background-attachment:fixed;
     color:var(--ink);
     font-family:var(--sans);
     -webkit-font-smoothing:antialiased;
@@ -71,26 +70,6 @@
   }
   .hero-content{position:relative; z-index:2;}
   .hero-birds{position:absolute; top:76px; left:0; right:0; z-index:1; opacity:0.4;}
-  .postmark{
-    position:absolute;
-    top:26px; right:26px;
-    width:96px; height:96px;
-    border:1.5px dashed rgba(43,42,40,0.3);
-    border-radius:50%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
-    font-family:var(--mono);
-    font-size:9px;
-    letter-spacing:0.08em;
-    text-transform:uppercase;
-    color:var(--ink-soft);
-    line-height:1.6;
-    transform:rotate(-8deg);
-    z-index:3;
-  }
-  .postmark b{display:block; font-size:12px; font-family:var(--serif); font-style:italic; letter-spacing:0; color:var(--ink);}
   .eyebrow{
     font-family:var(--mono);
     letter-spacing:0.25em;
@@ -424,14 +403,25 @@
     .ticket-stub{border-radius:0 0 18px 18px;}
     .perf{display:none;}
     .punch{display:none;}
-    .hero{padding:64px 18px 50px;}
+    .hero{padding:56px 18px 0;}
+    .hero-meta{margin-bottom:36px;}
+    .wrap{padding:0 14px 70px;}
+    .ticket-main{padding:22px 20px;}
+    .ticket-stub{padding:22px 20px;}
+    .ticket-main h3{font-size:1.4rem;}
+    .section-label{gap:10px; margin:44px 0 20px;}
+    .section-label h2{font-size:1.25rem;}
+    .flight-row{flex-wrap:wrap; gap:8px 14px; font-size:12px;}
+    .event{gap:12px;}
+    .event .time{min-width:64px; font-size:11.5px;}
+    .callout{padding:14px 15px; font-size:13px;}
+    .hero-birds{display:none;}
   }
 </style>
 </head>
 <body>
 
 <div class="hero">
-  <div class="postmark"><span><b>San Diego</b>CA · JUL 20–23<br>✈ SFO</span></div>
   <div class="hero-sun"></div>
   <svg class="hero-birds" viewBox="0 0 800 60" preserveAspectRatio="xMidYMid meet"><g fill="none" stroke="rgba(43,42,40,0.35)" stroke-width="2" stroke-linecap="round"><path d="M120 20 q8 -10 16 0 q8 -10 16 0"/><path d="M300 8 q7 -8 14 0 q7 -8 14 0"/><path d="M540 24 q9 -11 18 0 q9 -11 18 0"/><path d="M660 6 q6 -7 12 0 q6 -7 12 0"/></g></svg>
   <div class="hero-content">
@@ -493,8 +483,8 @@
         <div>
           <div class="label">Passengers</div>
           <div class="passengers">C. &amp; S. <span class="fine">+ J. &amp; N., economy</span></div>
-          <div class="label">Gate</div>
-          <div class="seat"><b>Vibes:</b> low-key, jet-lagged, hopeful</div>
+          <div class="label">Status</div>
+          <div class="seat"><b>Wheels down</b><br>La Jolla, here we come</div>
         </div>
         <div class="barcode"></div>
       </div>
@@ -541,8 +531,7 @@
           <div class="time">Evening</div>
           <div>
             <span class="who">Nick &amp; Calista</span>
-            <div class="what"><strong>Do their own thing</strong>
-            <p>No reservation, no plan — dinner and drinks wherever the evening takes them.</p></div>
+            <div class="what"><strong>Do their own thing</strong></div>
           </div>
         </div>
         <div class="event">
@@ -606,28 +595,25 @@
         <div class="callout"><b>Option:</b> <a href="https://new.dintaifungusa.com/us/locations/san-diego.html" target="_blank">Din Tai Fung</a> is also on the table today if the mood strikes — no reservations there, so it's walk-in and waitlist.</div>
 
         <div class="event">
-          <div class="time">7:30 PM</div>
+          <div class="time">Evening</div>
           <div>
             <span class="who">Jag, Simran, Nick &amp; Calista</span>
-            <div class="what"><strong>Dinner — <a href="https://www.telefericbarcelona.com/lajolla" target="_blank">Teleféric Barcelona</a>, La Jolla</strong>
-            <p>Reservation confirmed for 4, outdoor seating. Tapas, sangria, and a lively covered-patio energy to close out the crew's last full night together.</p></div>
+            <div class="what">
+              <strong>Two options for tonight</strong>
+              <p><b>Option 1 — Stay in La Jolla:</b> Dinner at <a href="https://www.telefericbarcelona.com/lajolla" target="_blank">Teleféric Barcelona</a> (reservation currently confirmed for 4, outdoor seating), then a nightcap next door at <a href="https://raisedxwolves.com/" target="_blank">Raised by Wolves</a>.</p>
+              <p><b>Option 2 — Head downtown:</b> Drive out to Gaslamp/Downtown for <a href="https://bornandraisedsteak.com/" target="_blank">Born &amp; Raised</a> and the surrounding bars.</p>
+            </div>
           </div>
         </div>
-        <div class="event">
-          <div class="time">9:15 PM</div>
-          <div>
-            <span class="who">Jag, Simran, Nick &amp; Calista</span>
-            <div class="what"><strong>Nightcap — <a href="https://raisedxwolves.com/" target="_blank">Raised by Wolves</a></strong>
-            <p>Party of 4, right next door to Teleféric. Cool, moody cocktail den for one quick round before an early night — Jag &amp; Nick are back in the office tomorrow.</p></div>
-          </div>
-        </div>
+
+        <div class="callout"><b>To decide:</b> Pick a lane for the evening, then update or cancel reservations to match.</div>
       </div>
       <div class="ticket-stub">
         <div>
           <div class="label">Roster Tonight</div>
           <div class="passengers">4 total <span class="fine">Jag · Simran · Nick · Calista</span></div>
-          <div class="label">Last Stop</div>
-          <div class="seat"><b>Raised by Wolves</b><br>9:15 PM · party of 4</div>
+          <div class="label">Decision Pending</div>
+          <div class="seat"><b>La Jolla</b> vs <b>Gaslamp</b><br>TBD</div>
         </div>
         <div class="barcode"></div>
       </div>
